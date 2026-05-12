@@ -19,8 +19,6 @@ import {
   MenuItem,
   Stack,
   Paper,
-  TextField,
-  Chip,
   Collapse,
 } from '@mui/material';
 import {
@@ -29,9 +27,6 @@ import {
   Menu as MenuIcon,
   Close as CloseIcon,
   Language,
-  DeleteOutlined,
-  Add,
-  Remove,
   ExpandMore,
   ExpandLess,
 } from '@mui/icons-material';
@@ -122,59 +117,54 @@ const Navbar: React.FC = () => {
     }
   }, []);
   
-  // Drawer animation variants
-  const drawerVariants = {
-    hidden: { x: -300, opacity: 0 },
-    visible: { 
-      x: 0, 
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 30,
-        staggerChildren: 0.05
-      }
-    },
-    exit: { 
-      x: -300, 
-      opacity: 0,
-      transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 30
-      }
+// Drawer animation variants - FIXED
+const drawerVariants = {
+  hidden: { x: -300, opacity: 0 },
+  visible: { 
+    x: 0, 
+    opacity: 1,
+    transition: {
+      type: "tween" as const,
+      duration: 0.3,
+      staggerChildren: 0.05
     }
-  };
-  
-  const itemVariants = {
-    hidden: { x: -50, opacity: 0 },
-    visible: { 
-      x: 0, 
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 25
-      }
-    },
-    hover: {
-      x: 15,
-      scale: 1.05,
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 10
-      }
-    },
-    tap: {
-      scale: 0.95,
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 10
-      }
+  },
+  exit: { 
+    x: -300, 
+    opacity: 0,
+    transition: {
+      type: "tween" as const,
+      duration: 0.3
     }
-  };
+  }
+};
+
+const itemVariants = {
+  hidden: { x: -50, opacity: 0 },
+  visible: { 
+    x: 0, 
+    opacity: 1,
+    transition: {
+      type: "tween" as const,
+      duration: 0.3
+    }
+  },
+  hover: {
+    x: 15,
+    scale: 1.05,
+    transition: {
+      type: "tween" as const,
+      duration: 0.2
+    }
+  },
+  tap: {
+    scale: 0.95,
+    transition: {
+      type: "tween" as const,
+      duration: 0.1
+    }
+  }
+};
   
   return (
     <>

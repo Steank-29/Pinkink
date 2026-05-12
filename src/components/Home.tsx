@@ -22,7 +22,7 @@ const stickers = [
 const MobileImageSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  const autoPlayRef = useRef(null);
+const autoPlayRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const slides = stickers.map(sticker => ({
     image: sticker.image,
@@ -32,7 +32,7 @@ const MobileImageSlider = () => {
     path: sticker.path,
   }));
 
-  const goToSlide = useCallback((index) => {
+  const goToSlide = useCallback((index: number) => {
     setCurrentSlide(index);
   }, []);
 
@@ -56,7 +56,7 @@ const MobileImageSlider = () => {
   }, [isHovered, goToNext]);
 
   const slideVariants = {
-    enter: (direction) => ({
+    enter: (direction: number) => ({
       x: direction > 0 ? '100%' : '-100%',
       opacity: 0,
     }),
@@ -64,7 +64,7 @@ const MobileImageSlider = () => {
       x: 0,
       opacity: 1,
     },
-    exit: (direction) => ({
+    exit: (direction: number) => ({
       x: direction < 0 ? '100%' : '-100%',
       opacity: 0,
     }),
@@ -205,7 +205,7 @@ const MobileImageSlider = () => {
                       letterSpacing: '0.1em',
                       textTransform: 'uppercase',
                       bgcolor: 'white',
-                      color: '#ed186d', // Always pink color
+                      color: '#ed186d',
                       borderRadius: '50px',
                       px: 4,
                       py: 1.4,
@@ -340,7 +340,7 @@ const Home: React.FC = () => {
         }}
       >
         <Container maxWidth="lg">
-          <Grid container spacing={4} alignItems="center">
+          <Grid container spacing={4} sx={{ alignItems: 'center' }}>
             {/* Left Side - Smaller Stacked Titles */}
             <Grid size={{ xs: 12, md: 7 }}>
               <motion.div
@@ -598,16 +598,16 @@ const Home: React.FC = () => {
           borderRadius: '20px',
           padding: { xs: 2, sm: 2, md: 3 },
           overflow: 'hidden',
-          mt: { xs: 0, md: -4 },
+          mt: { xs: 0, md: -1 },
           mb: 3,
           position: 'relative',
           zIndex: 5,
           boxShadow: '0 8px 30px rgba(0,0,0,0.05)',
-          display: { xs: 'none', md: 'block' }, // Hidden on mobile, visible on desktop
+          display: { xs: 'none', md: 'block' },
         }}
       >
         <Container maxWidth="xl">
-          <Grid container spacing={2} justifyContent="center">
+          <Grid container spacing={2} sx={{ justifyContent: 'center' }}>
             {stickers.map((sticker, index) => (
               <Grid size={{ xs: 12, sm: 6, md: 2.4 }} key={sticker.id}>
                 <motion.div

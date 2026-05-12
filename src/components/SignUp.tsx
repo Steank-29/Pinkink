@@ -61,97 +61,105 @@ const SignUp: React.FC = () => {
   const [signupError, setSignupError] = useState('');
   const [signupSuccess, setSignupSuccess] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name as string]: value,
-    });
-  };
+const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const { name, value } = e.target;
+  setFormData({
+    ...formData,
+    [name]: value,
+  });
+};
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfileImage(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const { name, value } = event.target;
+  setFormData({
+    ...formData,
+    [name]: value,
+  });
+};
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    let hasError = false;
-    const newErrors = { 
-      name: '', 
-      email: '', 
-      dateOfBirth: '',
-      gender: '',
-      password: '', 
-      confirmPassword: '' 
+const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const file = e.target.files?.[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setProfileImage(reader.result as string);
     };
+    reader.readAsDataURL(file);
+  }
+};
 
-    if (!formData.name) {
-      newErrors.name = 'Full name is required';
-      hasError = true;
-    }
-
-    if (!formData.email) {
-      newErrors.email = 'Email address is required';
-      hasError = true;
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
-      hasError = true;
-    }
-
-    if (!formData.dateOfBirth) {
-      newErrors.dateOfBirth = 'Date of birth is required';
-      hasError = true;
-    }
-
-    if (!formData.gender) {
-      newErrors.gender = 'Please select your gender';
-      hasError = true;
-    }
-
-    if (!formData.password) {
-      newErrors.password = 'Password is required';
-      hasError = true;
-    } else if (formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
-      hasError = true;
-    }
-
-    if (!formData.confirmPassword) {
-      newErrors.confirmPassword = 'Please confirm your password';
-      hasError = true;
-    } else if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Passwords do not match';
-      hasError = true;
-    }
-
-    if (!agreeTerms) {
-      setSignupError('You must agree to the Terms and Conditions');
-      hasError = true;
-    }
-
-    setErrors(newErrors);
-
-    if (!hasError) {
-      setSignupError('');
-      setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-        setSignupSuccess(true);
-        console.log('Account created:', { ...formData, profileImage });
-      }, 2000);
-    }
+const handleSubmit = (e: React.FormEvent) => {
+  e.preventDefault();
+  let hasError = false;
+  const newErrors = { 
+    name: '', 
+    email: '', 
+    dateOfBirth: '',
+    gender: '',
+    password: '', 
+    confirmPassword: '' 
   };
 
-  const handleGoogleSignUp = () => {
-    console.log('Sign up with Google');
-  };
+  if (!formData.name) {
+    newErrors.name = 'Full name is required';
+    hasError = true;
+  }
+
+  if (!formData.email) {
+    newErrors.email = 'Email address is required';
+    hasError = true;
+  } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    newErrors.email = 'Please enter a valid email address';
+    hasError = true;
+  }
+
+  if (!formData.dateOfBirth) {
+    newErrors.dateOfBirth = 'Date of birth is required';
+    hasError = true;
+  }
+
+  if (!formData.gender) {
+    newErrors.gender = 'Please select your gender';
+    hasError = true;
+  }
+
+  if (!formData.password) {
+    newErrors.password = 'Password is required';
+    hasError = true;
+  } else if (formData.password.length < 6) {
+    newErrors.password = 'Password must be at least 6 characters';
+    hasError = true;
+  }
+
+  if (!formData.confirmPassword) {
+    newErrors.confirmPassword = 'Please confirm your password';
+    hasError = true;
+  } else if (formData.password !== formData.confirmPassword) {
+    newErrors.confirmPassword = 'Passwords do not match';
+    hasError = true;
+  }
+
+  if (!agreeTerms) {
+    setSignupError('You must agree to the Terms and Conditions');
+    hasError = true;
+  }
+
+  setErrors(newErrors);
+
+  if (!hasError) {
+    setSignupError('');
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setSignupSuccess(true);
+      console.log('Account created:', { ...formData, profileImage });
+    }, 2000);
+  }
+};
+
+const handleGoogleSignUp = () => {
+  console.log('Sign up with Google');
+};
 
   if (signupSuccess) {
     return (
@@ -222,12 +230,12 @@ const SignUp: React.FC = () => {
         minHeight: 'calc(100vh - 85px)',
         display: 'flex',
         alignItems: 'center',
-        backgroundColor: isDarkMode ? '#141010' : '#f2f9f1',
+        backgroundColor:  '#ffffff',
         py: 4,
       }}
     >
       <Container maxWidth="lg">
-        <Grid container spacing={4} alignItems="center">
+        <Grid container spacing={4} sx={{ alignItems: 'center' }}>
           {/* Left Side - Form */}
           <Grid size={{ xs: 12, md: 6 }}>
             <Box>
@@ -311,7 +319,7 @@ const SignUp: React.FC = () => {
                       name="name"
                       placeholder="Enter your name"
                       value={formData.name}
-                      onChange={handleChange}
+                      onChange={handleInputChange}
                       error={!!errors.name}
                       helperText={errors.name}
                       sx={{
@@ -345,7 +353,7 @@ const SignUp: React.FC = () => {
                       type="email"
                       placeholder="you@example.com"
                       value={formData.email}
-                      onChange={handleChange}
+                      onChange={handleInputChange}
                       error={!!errors.email}
                       helperText={errors.email}
                       sx={{
@@ -378,7 +386,7 @@ const SignUp: React.FC = () => {
                       name="dateOfBirth"
                       type="date"
                       value={formData.dateOfBirth}
-                      onChange={handleChange}
+                      onChange={handleInputChange}
                       error={!!errors.dateOfBirth}
                       helperText={errors.dateOfBirth}
                       sx={{
@@ -399,8 +407,9 @@ const SignUp: React.FC = () => {
                             </InputAdornment>
                           ),
                         },
+                        inputLabel: { shrink: true }
                       }}
-                      InputLabelProps={{ shrink: true }}
+                      
                     />
                   </Grid>
 
@@ -414,33 +423,36 @@ const SignUp: React.FC = () => {
                       <InputLabel sx={{ fontFamily: "'Comic Sans MS', 'Comic Neue', cursive", fontSize: '0.85rem' }}>
                         Gender
                       </InputLabel>
-                      <Select
-                        name="gender"
-                        value={formData.gender}
-                        onChange={handleChange}
-                        label="Gender"
-                        sx={{
-                          borderRadius: '10px',
-                          '&:hover .MuiOutlinedInput-notchedOutline': {
-                            borderColor: '#ed186d',
-                          },
-                          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                            borderColor: '#ed186d',
-                          },
-                          '& .MuiSelect-select': { fontFamily: "'Comic Sans MS', 'Comic Neue', cursive", fontSize: '0.85rem' },
-                        }}
-                        startAdornment={
-                          <InputAdornment position="start">
-                            <Wc sx={{ color: '#ed186d', fontSize: 18, ml: 0.5 }} />
-                          </InputAdornment>
-                        }
-                      >
-                        <MenuItem value="" disabled>Select gender</MenuItem>
-                        <MenuItem value="female">Female</MenuItem>
-                        <MenuItem value="male">Male</MenuItem>
-                        <MenuItem value="non-binary">Non-binary</MenuItem>
-                        <MenuItem value="prefer-not-to-say">Prefer not to say</MenuItem>
-                      </Select>
+<Select
+  name="gender"
+  value={formData.gender}
+  onChange={(e) => {
+    setFormData({
+      ...formData,
+      gender: e.target.value,
+    });
+  }}
+  label="Gender"
+  sx={{
+    borderRadius: '10px',
+    '&:hover .MuiOutlinedInput-notchedOutline': {
+      borderColor: '#ed186d',
+    },
+    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+      borderColor: '#ed186d',
+    },
+    '& .MuiSelect-select': { fontFamily: "'Comic Sans MS', 'Comic Neue', cursive", fontSize: '0.85rem' },
+  }}
+  startAdornment={
+    <InputAdornment position="start">
+      <Wc sx={{ color: '#ed186d', fontSize: 18, ml: 0.5 }} />
+    </InputAdornment>
+  }
+>
+  <MenuItem value="" disabled>Select gender</MenuItem>
+  <MenuItem value="female">Female</MenuItem>
+  <MenuItem value="male">Male</MenuItem>
+</Select>
                       {errors.gender && (
                         <FormHelperText sx={{ fontFamily: "'Comic Sans MS', 'Comic Neue', cursive" }}>
                           {errors.gender}
@@ -458,7 +470,7 @@ const SignUp: React.FC = () => {
                       type={showPassword ? 'text' : 'password'}
                       placeholder="Min. 6 characters"
                       value={formData.password}
-                      onChange={handleChange}
+                      onChange={handleInputChange}
                       error={!!errors.password}
                       helperText={errors.password}
                       sx={{
@@ -499,7 +511,7 @@ const SignUp: React.FC = () => {
                       type={showConfirmPassword ? 'text' : 'password'}
                       placeholder="Confirm your password"
                       value={formData.confirmPassword}
-                      onChange={handleChange}
+                      onChange={handleInputChange}
                       error={!!errors.confirmPassword}
                       helperText={errors.confirmPassword}
                       sx={{

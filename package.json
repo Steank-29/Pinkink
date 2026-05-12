@@ -6,8 +6,10 @@
   "scripts": {
     "dev": "vite --port 30000",
     "build": "tsc -b && vite build",
+    "preview": "vite preview",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "vercel-build": "npm run build",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

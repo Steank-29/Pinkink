@@ -1,0 +1,47 @@
+/* Google Fonts Import - MUST be first */
+@import url('https://fonts.googleapis.com/css2?family=Amaranth:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* Comic Sans MS Local Font Setup */
+@font-face {
+  font-family: 'Comic Sans MS';
+  src: url('../public/fonts/Comic\ Sans\ MS.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Comic Sans MS', 'Amaranth', 'Poppins', 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optional: Specific elements with Comic Sans */
+h1, h2, h3, h4, h5, h6, button, .comic-text {
+  font-family: 'Comic Sans MS', 'Amaranth', sans-serif;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c3195d;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #680747;
+}

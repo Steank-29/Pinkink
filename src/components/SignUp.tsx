@@ -169,12 +169,12 @@ const handleGoogleSignUp = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: isDarkMode ? '#141010' : '#f2f9f1',
+          backgroundColor: '#ffffff',
           py: 6,
         }}
       >
         <Container maxWidth="sm">
-          <Box sx={{ textAlign: 'center' }}>
+          <Box sx={{ textAlign: 'center' , }}>
             <Box
               component="img"
               src={logo}
@@ -232,6 +232,7 @@ const handleGoogleSignUp = () => {
         alignItems: 'center',
         backgroundColor:  '#ffffff',
         py: 4,
+        mt: { xs:10, md: 0 },
       }}
     >
       <Container maxWidth="lg">

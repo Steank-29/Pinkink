@@ -73,7 +73,7 @@ const Login: React.FC = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: isDarkMode ? '#141010' : '#f2f9f1',
+        backgroundColor: '#ffffff',
         py: 6,
       }}
     >
@@ -83,7 +83,8 @@ const Login: React.FC = () => {
           sx={{
             p: { xs: 3, sm: 5 },
             borderRadius: '24px',
-            backgroundColor: isDarkMode ? '#1e1a1a' : '#ffffff',
+            mt: { xs:10, md: 0 },
+            backgroundColor: '#ffffff',
             border: `1px solid ${isDarkMode ? '#680747' : '#e0e0e0'}`,
             boxShadow: isDarkMode 
               ? '0 8px 32px rgba(0,0,0,0.3)'
